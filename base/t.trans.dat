@@ -1,0 +1,138 @@
+TITLE
+.      1-layer 2-d EVO simulation
+FREE_SURFACE_BC true
+SOLUTE_TRANSPORT true
+UNITS
+      -time days
+      -horizontal_grid meters
+      -vertical_grid meters
+      -head meters
+      -hydraulic_conductivity meters/days
+      -specific_storage 1/meters
+      -dispersivity meters
+      -flux meters/days
+      -well_diameter centimeters
+      -well_flow_rate meters3/days
+GRID
+      -uniform   X     0  50 101
+      -uniform   Y     0  20  41
+      -uniform   Z   298 305   2
+      -chemistry_dimensions XY
+      -print_orientation    XY
+MEDIA
+      -domain
+            -Kx 69.12
+            -Ky 6.912
+            -Kz 6.912
+            -porosity 0.2
+            -specific_storage 1E-5
+            -longitudinal_dispersivity    0.5
+            -horizontal_dispersivity      0.1
+            -vertical_dispersivity        0.1
+            -active 1
+SPECIFIED_HEAD_BC
+        -box   0 0 298 0 20 305
+                -head      0       300.8
+                -associated_solution          0         1
+        -box   50 0 298 50 20 305
+                -head      0       299.3
+                -associated_solution          0         1
+HEAD_IC
+	-domain
+	-head XYZ GRID f.head.dat
+CHEMISTRY_IC
+	-domain
+	-solution 3
+	-equilibrium_phases 3
+	-surface 3
+	-kinetics 3
+WELL 1 FW212
+	-location	10.0  10.0
+	-injection_rate
+		0	12.184
+		0.08333 day 0.0
+	-solution	
+		0	2
+	-diameter	0.08255
+	-elevation	298.61 300.07
+WELL 2 FW213
+	-location	10.8 8.53
+	-injection_rate
+		0	12.184
+		0.08333 day 0.0
+	-solution	
+		0	2
+	-diameter	0.08255
+	-elevation	298.61 300.07
+WELL 3 FW214
+	-location	9.99 11.39
+	-injection_rate
+		0	12.184
+		0.08333 day 0.0
+	-solution	
+		0	2
+	-diameter	0.08255
+	-elevation	298.61 300.07
+STEADY_FLOW false
+      -head_tolerance 1.0E-6
+      -flow_balance_tolerance 1.0E-6
+      -iterations 100
+SOLUTION_METHOD
+      -iterative_solver true
+      -tolerance 1E-12
+      -save_directions 10
+      -maximum_iterations 500
+      -space_differencing 0
+      -time_differencing 1
+      -cross_dispersion true
+      -rebalance_fraction 0.5
+      -rebalance_by_cell false
+PRINT_INITIAL
+      -boundary_conditions false
+      -components false
+      -conductance false
+      -echo_input true
+      -fluid_properties true
+      -heads true
+      -media_properties false
+      -solution_method true
+      -wells true
+      -xyz_components false
+      -xyz_heads false
+      -xyz_wells false
+PRINT_FREQUENCY
+                  0 
+      -bc_flow_rates 0 
+      -boundary_conditions false
+      -components 0 
+      -conductance 0 
+      -flow_balance end
+      -HDF_heads end
+      -HDF_velocities end
+      -heads end
+      -progress_statistics end
+      -restart 0 
+      -velocities 0 
+      -wells end
+      -xyz_components 0 
+      -xyz_heads 0 
+      -xyz_velocities 0 
+      -xyz_wells 0 
+      -end_of_period_default false
+	-xyz_chemistry	0.1 days 
+0.1
+	-xyz_chemistry	0.1 days 
+1.0
+	-xyz_chemistry	1 days 
+50.0
+	-xyz_chemistry	5.0 days 
+TIME_CONTROL
+            -start_time 0
+            -time_step
+                    0.0 0.001 days
+                    0.1 0.010 days
+                    1.0 0.020 days
+                  200.0 0.050 days
+            -time_end  400.0 days
+END
+

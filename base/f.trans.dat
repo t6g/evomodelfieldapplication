@@ -1,0 +1,96 @@
+TITLE
+.      1-layer 2-d EVO simulation
+FREE_SURFACE_BC true
+SOLUTE_TRANSPORT false
+UNITS
+      -time days
+      -horizontal_grid meters
+      -vertical_grid meters
+      -head meters
+      -hydraulic_conductivity meters/days
+      -specific_storage 1/meters
+      -dispersivity meters
+      -flux meters/days
+      -well_diameter centimeters
+      -well_flow_rate meters3/days
+GRID
+      -uniform   X     0  50 101
+      -uniform   Y     0  20  41
+      -uniform   Z   298 305  2
+      -chemistry_dimensions XY
+      -print_orientation    XY
+MEDIA
+      -domain
+            -Kx 69.12
+            -Ky 6.912
+            -Kz 6.912
+            -porosity 0.2
+            -specific_storage 1E-5
+            -longitudinal_dispersivity    0.5
+            -horizontal_dispersivity      0.2
+            -vertical_dispersivity        0.2
+            -active 1
+SPECIFIED_HEAD_BC
+        -box   0 0 298 0 20 305
+                -head      0       300.8
+                -associated_solution          0         1
+        -box   50 0 298 50 20 305
+                -head      0       299.3
+                -associated_solution          0         1
+HEAD_IC
+        -domain
+        -head  X 300.8 0.0 299.3 50.0
+STEADY_FLOW true
+      -head_tolerance 1.0E-6
+      -flow_balance_tolerance 1.0E-6
+      -iterations 100
+SOLUTION_METHOD
+      -iterative_solver true
+      -tolerance 1E-12
+      -save_directions 10
+      -maximum_iterations 500
+      -space_differencing 0
+      -time_differencing 1
+      -cross_dispersion true
+      -rebalance_fraction 0.5
+      -rebalance_by_cell false
+PRINT_INITIAL
+      -boundary_conditions false
+      -components false
+      -conductance false
+      -echo_input true
+      -fluid_properties true
+      -heads true
+      -media_properties false
+      -solution_method true
+      -wells true
+      -xyz_components false
+      -xyz_heads false
+      -xyz_wells false
+PRINT_FREQUENCY
+                  0 
+      -bc_flow_rates 0 
+      -boundary_conditions false
+      -components 0 
+      -conductance 0 
+      -flow_balance end
+      -HDF_heads end
+      -HDF_velocities end
+      -heads end
+      -progress_statistics end
+      -restart 0 
+      -velocities 0 
+      -wells end
+      -xyz_components 0 
+      -xyz_heads 0 
+      -xyz_velocities 0 
+      -xyz_wells 0 
+      -end_of_period_default false
+      -save_final_heads true
+TIME_CONTROL
+            -start_time 0
+            -time_step
+                  0 0.1 days
+            -time_end  10.0 days
+END
+
